@@ -43,6 +43,7 @@ void preformRender(ZooidComponent* root, ZooidManager* manager) {
         );
     }
     
+    // NOTE - pack.members.size() === 0 <-- START HERE
     for (int i=0; i<pack.members.size(); i++) {
         ZooidDescription member = pack.members[i];
         manager->updateZooid(member.id, member.pos, member.color);
@@ -67,7 +68,7 @@ vector<unsigned int> getAvailableZooids(ZooidManager* manager) {
 Bound getZooidsBound(ZooidManager* manager) {
     return {
         .width = manager->getRealWorldWidth(),
-        .height = manager->getRealWorldWidth(),
+        .height = manager->getRealWorldHeight(),
         .pos = ofVec2f{ 0, 0 }
     };
 }
@@ -88,7 +89,9 @@ void ZooidRenderer::render(ZooidComponent* _root) {
 
 void ZooidRenderer::checkForUpdates() {
     if (manager.receiveInformation()) {
-        root->preformUpdate(getAvailableZooids(&manager), getZooidsBound(&manager));
+        Bound bound = getZooidsBound(&manager);
+        
+        root->preformUpdate(getAvailableZooids(&manager), bound);
         preformRender(root, &manager);
     }
 }
