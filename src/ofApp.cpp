@@ -2,14 +2,14 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    zooidRenderer.initialize(60, ofGetWidth(), ofGetHeight());
+    //zooidRenderer.initialize(60, ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    if (root == NULL) return;
+    /*if (root == NULL) return;
     
-    zooidRenderer.checkForUpdates();
+    zooidRenderer.checkForUpdates();*/
 }
 
 //--------------------------------------------------------------
@@ -39,12 +39,12 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    if (root != NULL) {
+    /*if (root != NULL) {
         delete root;
     }
     
     root = new Table;
-    zooidRenderer.render(root);
+    zooidRenderer.render(root);*/
 }
 
 //--------------------------------------------------------------

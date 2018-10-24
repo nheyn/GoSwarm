@@ -2,9 +2,6 @@
 
 #include "ofMain.h"
 
-#include "ZooidRenderer.hpp"
-#include "Table.hpp"
-
 class ofApp : public ofBaseApp{
 
 	public:
@@ -25,6 +22,4 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     private:
-		ZooidRenderer zooidRenderer;
-        ZooidComponent* root;
 };
