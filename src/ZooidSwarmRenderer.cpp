@@ -29,16 +29,18 @@ void ZooidSwarmRenderer::initialize(float width, float height) {
 }
 
 void ZooidSwarmRenderer::updateSwarm(SwarmNode node) {
-    renderNodeToZooids(
-        node,
-        {
-            .width = zooidManager.getRealWorldWidth(),
-            .height = zooidManager.getRealWorldHeight(),
-            .position = { 0, 0 }
-        },
-        &zooidManager
-    );
-    
-    zooidManager.setAssignmentMode(AssignmentMode::NaiveAssignment);
-    zooidManager.sendUpdates();
+    if (zooidManager.receiveInformation()) {
+        renderNodeToZooids(
+            node,
+            {
+                .width = zooidManager.getRealWorldWidth(),
+                .height = zooidManager.getRealWorldHeight(),
+                .position = { 0, 0 }
+            },
+            &zooidManager
+        );
+        
+        zooidManager.setAssignmentMode(AssignmentMode::NaiveAssignment);
+        zooidManager.sendUpdates();
+    }
 }
