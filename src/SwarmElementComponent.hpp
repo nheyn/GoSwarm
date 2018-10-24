@@ -14,7 +14,7 @@
 
 class SwarmElementComponent: public SwarmElement {
 public:
-    SwarmElementComponent(float _width, float _height, ofVec2f _position, ofColor _color, SwarmComponent* _component);
+    SwarmElementComponent(float _width, float _height, ofVec2f _position, SwarmComponent* _component);
     SwarmElement* render();
     
 private:

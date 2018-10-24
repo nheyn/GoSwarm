@@ -26,24 +26,26 @@ ElementBound convertBound(ElementBound outerBound, ElementBound innerBound);
 
 class SwarmElement {
 public:
-    SwarmElement(float _width, float _height, ofVec2f _position, ofColor _color);
+    SwarmElement(float _width, float _height, ofVec2f _position);
     ElementBound getBound();
     virtual ~SwarmElement() = default;
     
 protected:
     ElementBound bound;
-    ofColor color;
 };
 
 class SwarmElementBot: public SwarmElement {
 public:
     SwarmElementBot(float _size, ofVec2f _center, ofColor _color);
     BotSpec getBot();
+    
+private:
+    ofColor color;
 };
 
 class SwarmElementPack: public SwarmElement {
 public:
-    SwarmElementPack(float _width, float _height, ofVec2f _position, ofColor _color, vector<SwarmElement*> _members);
+    SwarmElementPack(float _width, float _height, ofVec2f _position, vector<SwarmElement*> _members);
     vector<SwarmElement*> getMembers();
     
 private:

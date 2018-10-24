@@ -24,13 +24,12 @@ ElementBound convertBound(ElementBound outerBound, ElementBound innerBound) {
 }
 
 // -- SwarmElement methods --
-SwarmElement::SwarmElement(float _width, float _height, ofVec2f _position, ofColor _color) {
+SwarmElement::SwarmElement(float _width, float _height, ofVec2f _position) {
     bound = {
         .width = _width,
         .height = _height,
         .position = _position
     };
-    color = _color;
 }
 
 ElementBound SwarmElement::getBound() {
@@ -39,18 +38,20 @@ ElementBound SwarmElement::getBound() {
 
 // -- SwarmElementBot methods --
 SwarmElementBot::SwarmElementBot(float _size, ofVec2f _center, ofColor _color)
-: SwarmElement(_size, _size, _center, _color) {}
+: SwarmElement(_size, _size, _center) {
+    color = _color;
+}
 
 BotSpec SwarmElementBot::getBot() {
     return {
-        .position = bound.position,
+        .position = { bound.position.x, bound.position.y },
         .color = color
     };
 }
 
 // -- PackSwarmElement methods --
-SwarmElementPack::SwarmElementPack(float _width, float _height, ofVec2f _position, ofColor _color, vector<SwarmElement*> _members)
-: SwarmElement(_width, _height, _position, _color) {
+SwarmElementPack::SwarmElementPack(float _width, float _height, ofVec2f _position, vector<SwarmElement*> _members)
+: SwarmElement(_width, _height, _position) {
     members = _members;
 }
 

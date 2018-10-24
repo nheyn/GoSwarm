@@ -24,6 +24,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     private:
-        ZooidSwarmRenderer* renderer;
+        ZooidSwarmRenderer renderer;
         SwarmElement* root;
+        SwarmElement* z1;
+        SwarmElement* z2;
 };

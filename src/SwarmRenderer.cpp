@@ -8,16 +8,15 @@
 #include "SwarmRenderer.hpp"
 
 // -- SwarmNode helper functions ---
-SwarmNode getTreeFrom(SwarmElement* el);
-SwarmNode getTreeFromElements(vector<SwarmElement*> els, ElementBound bound) ;
-
-SwarmNode getTreeFrom(SwarmElement* el) {
+SwarmNode getTreeFrom(SwarmElement* el, SwarmRenderer::KeyGen gen) {
+    if (el == NULL) return;
+    
     SwarmElementBot* bEl = dynamic_cast<SwarmElementBot*>(el);
     if (bEl != NULL) {
         BotSpec spec = bEl->getBot();
         
         return SwarmNode({
-            .key = 1, //TODO, add keygen
+            .key = gen.nextKey(),
             .position = spec.position,
             .color = spec.color
         });
@@ -25,28 +24,29 @@ SwarmNode getTreeFrom(SwarmElement* el) {
     
     SwarmElementPack* pEl = dynamic_cast<SwarmElementPack*>(el);
     if (pEl != NULL) {
-        return getTreeFromElements(pEl->getMembers(), pEl->getBound());
+        vector<SwarmElement*> els = pEl->getMembers();
+        vector<SwarmNode> children;
+        for (int i=0; i<els.size(); i++) {
+            children.push_back(getTreeFrom(els[i], gen));
+        }
+        
+        return SwarmNode({
+            .key = gen.nextKey(),
+            .children = children,
+            .bound = pEl->getBound(),
+        });
     }
     
     SwarmElementComponent* cEl = dynamic_cast<SwarmElementComponent*>(el);
     if (pEl != NULL) {
-        return getTreeFromElements({ cEl->render() }, cEl->getBound());
+        return SwarmNode(SwarmNode::Internal{
+            .key = gen.nextKey(),
+            .children = { getTreeFrom(cEl->render(), gen) },
+            .bound = cEl->getBound(),
+        });
     }
     
     throw invalid_argument("Invalid SwarmElement subclass");
-}
-
-SwarmNode getTreeFromElements(vector<SwarmElement*> els, ElementBound bound) {
-    vector<SwarmNode> children;
-    for (int i=0; i<els.size(); i++) {
-        children.push_back(getTreeFrom(els[i]));
-    }
-    
-    return SwarmNode({
-        .key = 1, //TODO, add keygen
-        .children = children,
-        .bound = bound,
-    });
 }
 
 // -- SwarmRender node ---
@@ -72,6 +72,18 @@ bool SwarmNode::isLeaf() {
     return type == leaf;
 }
 
+// -- SwarmRender::KeyGen methods --
+SwarmRenderer::KeyGen::KeyGen(unsigned int startIndex) {
+    index = startIndex;
+}
+
+unsigned int SwarmRenderer::KeyGen::nextKey() {
+    unsigned int currIndex = index;
+    index += 1;
+    
+    return currIndex;
+}
+
 // -- SwarmRender methods ---
 void SwarmRenderer::render(SwarmElement* _root) {
     root = _root;
@@ -79,7 +91,7 @@ void SwarmRenderer::render(SwarmElement* _root) {
 }
 
 void SwarmRenderer::rerender() {
-    updateSwarm(getTreeFrom(root));
+    updateSwarm(getTreeFrom(root, KeyGen(0)));
 }
 
 void SwarmRenderer::updateSwarm(SwarmNode rootNode) {

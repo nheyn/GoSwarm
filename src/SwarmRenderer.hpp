@@ -40,6 +40,14 @@ private:
 
 class SwarmRenderer {
 public:
+    class KeyGen {
+    public:
+        KeyGen(unsigned int startIndex);
+        unsigned int nextKey();
+    private:
+        unsigned int index;
+    };
+    
     void render(SwarmElement* _root);
     void rerender();
     

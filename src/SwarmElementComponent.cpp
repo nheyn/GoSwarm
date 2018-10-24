@@ -8,8 +8,8 @@
 #include "SwarmElementComponent.hpp"
 
 
-SwarmElementComponent::SwarmElementComponent(float _width, float _height, ofVec2f _position, ofColor _color, SwarmComponent* _component)
-: SwarmElement(_width, _height, _position, _color) {
+SwarmElementComponent::SwarmElementComponent(float _width, float _height, ofVec2f _position, SwarmComponent* _component)
+: SwarmElement(_width, _height, _position) {
     component = _component;
 }
 

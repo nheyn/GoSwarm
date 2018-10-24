@@ -11,9 +11,12 @@
 void renderNodeToZooids(SwarmNode node, ElementBound bound, ZooidManager* zooidManager) {
     if (node.isLeaf()) {
         SwarmNode::Leaf leaf = node.getLeaf();
+        unsigned int key = leaf.key;
+        ofVec2f pos = leaf.position;
+        ofColor color = leaf.color;
         
         //TODO - get keys working better
-        zooidManager->updateZooid((unsigned int)leaf.key, convertPosition(bound, leaf.position), leaf.color);
+        zooidManager->updateZooid(leaf.key, convertPosition(bound, leaf.position), leaf.color);
         return;
     }
     
