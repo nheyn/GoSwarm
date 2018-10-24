@@ -11,8 +11,7 @@
 #include <boost/variant.hpp>
 #include "ofMain.h"
 #include "SwarmElement.hpp"
-#include "SwarmComponent.hpp"
-
+//#include "SwarmComponent.hpp"
 
 class SwarmNode {
 public:
@@ -32,8 +31,7 @@ public:
     SwarmNode(Leaf _node);
     Internal getInternal();
     Leaf getLeaf();
-    bool isLeaf();
-    
+    bool isLeaf();    
     
 private:
     enum { internal, leaf } type;
@@ -41,10 +39,15 @@ private:
 };
 
 class SwarmRenderer {
-    
 public:
-    void render(SwarmElement* rootEl);
+    void render(SwarmElement* _root);
+    void rerender();
+    
+protected:
     virtual void updateSwarm(SwarmNode rootNode);
+    
+private:
+    SwarmElement* root;
 };
 
 #endif /* SwarmRenderer_hpp */

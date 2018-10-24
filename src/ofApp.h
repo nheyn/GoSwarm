@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "SwarmElement.hpp"
+#include "ZooidSwarmRenderer.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -22,4 +24,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     private:
+        ZooidSwarmRenderer* renderer;
+        SwarmElement* root;
 };

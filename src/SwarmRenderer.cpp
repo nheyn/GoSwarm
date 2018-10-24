@@ -7,7 +7,7 @@
 
 #include "SwarmRenderer.hpp"
 
-// -- Helper functions ---
+// -- SwarmNode helper functions ---
 SwarmNode getTreeFrom(SwarmElement* el);
 SwarmNode getTreeFromElements(vector<SwarmElement*> els, ElementBound bound) ;
 
@@ -17,7 +17,7 @@ SwarmNode getTreeFrom(SwarmElement* el) {
         BotSpec spec = bEl->getBot();
         
         return SwarmNode({
-            .key = 0, //TODO, add keygen
+            .key = 1, //TODO, add keygen
             .position = spec.position,
             .color = spec.color
         });
@@ -28,10 +28,10 @@ SwarmNode getTreeFrom(SwarmElement* el) {
         return getTreeFromElements(pEl->getMembers(), pEl->getBound());
     }
     
-    ComponentSwarmElement* cEl = dynamic_cast<ComponentSwarmElement*>(el);
+    /*ComponentSwarmElement* cEl = dynamic_cast<ComponentSwarmElement*>(el);
     if (pEl != NULL) {
         return getTreeFromElements(cEl->render(), cEl->getBound());
-    }
+    }*/
     
     throw invalid_argument("Invalid SwarmElement subclass");
 }
@@ -43,7 +43,7 @@ SwarmNode getTreeFromElements(vector<SwarmElement*> els, ElementBound bound) {
     }
     
     return SwarmNode({
-        .key = 0, //TODO, add keygen
+        .key = 1, //TODO, add keygen
         .children = children,
         .bound = bound,
     });
@@ -73,8 +73,13 @@ bool SwarmNode::isLeaf() {
 }
 
 // -- SwarmRender methods ---
-void SwarmRenderer::render(SwarmElement* rootEl) {
-    updateSwarm(getTreeFrom(rootEl));
+void SwarmRenderer::render(SwarmElement* _root) {
+    root = _root;
+    rerender();
+}
+
+void SwarmRenderer::rerender() {
+    updateSwarm(getTreeFrom(root));
 }
 
 void SwarmRenderer::updateSwarm(SwarmNode rootNode) {

@@ -2,14 +2,17 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    //zooidRenderer.initialize(60, ofGetWidth(), ofGetHeight());
+    renderer = new ZooidSwarmRenderer(); // THIS IS NOT DELETE, BUT SHOULD ONLY NEED IT ON QUIT
+    
+    ofSetFrameRate(60);
+    renderer->initialize(ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    /*if (root == NULL) return;
+    if (root == NULL) return;
     
-    zooidRenderer.checkForUpdates();*/
+    renderer->rerender();
 }
 
 //--------------------------------------------------------------
@@ -39,12 +42,12 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    /*if (root != NULL) {
+    if (root != NULL) {
         delete root;
     }
     
-    root = new Table;
-    zooidRenderer.render(root);*/
+    root = new BotSwarmElement(0, {0.5, 0.5}, ofColor::black);
+    renderer->render(root);
 }
 
 //--------------------------------------------------------------
