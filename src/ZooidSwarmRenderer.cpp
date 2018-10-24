@@ -11,14 +11,15 @@
 void renderNodeToZooids(SwarmNode node, ElementBound bound, ZooidManager* zooidManager) {
     if (node.isLeaf()) {
         SwarmNode::Leaf leaf = node.getLeaf();
-        zooidManager->updateZooid((unsigned int)leaf.key, leaf.position, leaf.color);
+        
+        //TODO - get keys working better
+        zooidManager->updateZooid((unsigned int)leaf.key, convertPosition(bound, leaf.position), leaf.color);
         return;
     }
     
     SwarmNode::Internal internal = node.getInternal();
-    vector<SwarmNode> children = internal.children;
-    for(int i=0; i<children.size(); i++) {
-        renderNodeToZooids(children[i], bound, zooidManager);
+    for(int i=0; i<internal.children.size(); i++) {
+        renderNodeToZooids(internal.children[i], convertBound(bound, internal.bound), zooidManager);
     }
 }
 

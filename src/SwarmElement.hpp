@@ -21,6 +21,9 @@ typedef struct {
     ofVec2f position;
 } ElementBound;
 
+ofVec2f convertPosition(ElementBound bound, ofVec2f position);
+ElementBound convertBound(ElementBound outerBound, ElementBound innerBound);
+
 class SwarmElement {
 public:
     SwarmElement(float _width, float _height, ofVec2f _position, ofColor _color);

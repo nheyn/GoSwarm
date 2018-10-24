@@ -7,6 +7,22 @@
 
 #include "SwarmElement.hpp"
 
+// --- ElementBound helper functions ---
+ofVec2f convertPosition(ElementBound bound, ofVec2f position) {
+    return {
+        bound.position.x + (bound.width * position.x),
+        bound.position.y + (bound.height * position.y)
+    };
+}
+
+ElementBound convertBound(ElementBound outerBound, ElementBound innerBound) {
+    return {
+        .width = outerBound.width * innerBound.width,
+        .height = outerBound.height * innerBound.height,
+        .position = convertPosition(outerBound, innerBound.position)
+    };
+}
+
 // -- SwarmElement methods --
 SwarmElement::SwarmElement(float _width, float _height, ofVec2f _position, ofColor _color) {
     bound = {
