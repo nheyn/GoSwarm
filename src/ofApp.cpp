@@ -46,7 +46,7 @@ void ofApp::mousePressed(int x, int y, int button){
         delete root;
     }
     
-    root = new BotSwarmElement(0, {0.5, 0.5}, ofColor::black);
+    root = new SwarmElementBot(0, {0.5, 0.5}, ofColor::black);
     renderer->render(root);
 }
 

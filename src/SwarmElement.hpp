@@ -32,15 +32,15 @@ protected:
     ofColor color;
 };
 
-class BotSwarmElement: public SwarmElement {
+class SwarmElementBot: public SwarmElement {
 public:
-    BotSwarmElement(float _size, ofVec2f _center, ofColor _color);
+    SwarmElementBot(float _size, ofVec2f _center, ofColor _color);
     BotSpec getBot();
 };
 
-class PackSwarmElement: public SwarmElement {
+class SwarmElementPack: public SwarmElement {
 public:
-    PackSwarmElement(float _width, float _height, ofVec2f _position, ofColor _color, vector<SwarmElement*> _members);
+    SwarmElementPack(float _width, float _height, ofVec2f _position, ofColor _color, vector<SwarmElement*> _members);
     vector<SwarmElement*> getMembers();
     
 private:

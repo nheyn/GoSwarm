@@ -21,11 +21,11 @@ ElementBound SwarmElement::getBound() {
     return bound;
 }
 
-// -- BotSwarmElement methods --
-BotSwarmElement::BotSwarmElement(float _size, ofVec2f _center, ofColor _color)
+// -- SwarmElementBot methods --
+SwarmElementBot::SwarmElementBot(float _size, ofVec2f _center, ofColor _color)
 : SwarmElement(_size, _size, _center, _color) {}
 
-BotSpec BotSwarmElement::getBot() {
+BotSpec SwarmElementBot::getBot() {
     return {
         .position = bound.position,
         .color = color
@@ -33,11 +33,11 @@ BotSpec BotSwarmElement::getBot() {
 }
 
 // -- PackSwarmElement methods --
-PackSwarmElement::PackSwarmElement(float _width, float _height, ofVec2f _position, ofColor _color, vector<SwarmElement*> _members)
+SwarmElementPack::SwarmElementPack(float _width, float _height, ofVec2f _position, ofColor _color, vector<SwarmElement*> _members)
 : SwarmElement(_width, _height, _position, _color) {
     members = _members;
 }
 
-vector<SwarmElement*> PackSwarmElement::getMembers() {
+vector<SwarmElement*> SwarmElementPack::getMembers() {
     return members;
 }

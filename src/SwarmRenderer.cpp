@@ -12,7 +12,7 @@ SwarmNode getTreeFrom(SwarmElement* el);
 SwarmNode getTreeFromElements(vector<SwarmElement*> els, ElementBound bound) ;
 
 SwarmNode getTreeFrom(SwarmElement* el) {
-    BotSwarmElement* bEl = dynamic_cast<BotSwarmElement*>(el);
+    SwarmElementBot* bEl = dynamic_cast<SwarmElementBot*>(el);
     if (bEl != NULL) {
         BotSpec spec = bEl->getBot();
         
@@ -23,15 +23,15 @@ SwarmNode getTreeFrom(SwarmElement* el) {
         });
     }
     
-    PackSwarmElement* pEl = dynamic_cast<PackSwarmElement*>(el);
+    SwarmElementPack* pEl = dynamic_cast<SwarmElementPack*>(el);
     if (pEl != NULL) {
         return getTreeFromElements(pEl->getMembers(), pEl->getBound());
     }
     
-    /*ComponentSwarmElement* cEl = dynamic_cast<ComponentSwarmElement*>(el);
+    SwarmElementComponent* cEl = dynamic_cast<SwarmElementComponent*>(el);
     if (pEl != NULL) {
-        return getTreeFromElements(cEl->render(), cEl->getBound());
-    }*/
+        return getTreeFromElements({ cEl->render() }, cEl->getBound());
+    }
     
     throw invalid_argument("Invalid SwarmElement subclass");
 }

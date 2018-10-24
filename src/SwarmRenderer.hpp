@@ -11,7 +11,7 @@
 #include <boost/variant.hpp>
 #include "ofMain.h"
 #include "SwarmElement.hpp"
-//#include "SwarmComponent.hpp"
+#include "SwarmElementComponent.hpp"
 
 class SwarmNode {
 public:
