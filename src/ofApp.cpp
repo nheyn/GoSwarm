@@ -2,14 +2,15 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    zooidRenderer.initialize(60, ofGetWidth(), ofGetHeight());
+    ofSetFrameRate(60);
+    renderer.initialize(ofGetWidth(), ofGetHeight());
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     if (root == NULL) return;
     
-    zooidRenderer.checkForUpdates();
+    renderer.rerender();
 }
 
 //--------------------------------------------------------------
@@ -41,10 +42,14 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     if (root != NULL) {
         delete root;
+        delete z1;
+        delete z2;
     }
     
-    root = new Table;
-    zooidRenderer.render(root);
+    z1 = new SwarmElementBot(0, {0.25, 0.5}, ofColor::black);
+    z2 = new SwarmElementBot(0, {0.5, 0.25}, ofColor::white);
+    root = new SwarmElementPack(1, 1, {0, 0}, { z1, z2 });
+    renderer.render(root);
 }
 
 //--------------------------------------------------------------

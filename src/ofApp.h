@@ -1,9 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-
-#include "ZooidRenderer.hpp"
-#include "Table.hpp"
+#include "SwarmElement.hpp"
+#include "ZooidSwarmRenderer.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -25,6 +24,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     private:
-		ZooidRenderer zooidRenderer;
-        ZooidComponent* root;
+        ZooidSwarmRenderer renderer;
+        SwarmElement* root;
+        SwarmElement* z1;
+        SwarmElement* z2;
 };

@@ -371,6 +371,7 @@ bool ZooidManager::sendUpdates() {
         }
         writer.EndObject();
         
+        cout << s.GetString();
         int bytesSent = udpSender.Send(s.GetString(), (unsigned int)s.GetSize());
         
         
