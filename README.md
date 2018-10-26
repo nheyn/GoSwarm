@@ -1,6 +1,8 @@
 # GoSwarm
 *Using [SwarmUI](https://github.com/ShapeLab/SwarmUI) for the Stones of a [Go board](<https://en.wikipedia.org/wiki/Go_%28game%29>)*
 
+__THIS HAS BEEN REPLACED: see [react-swarm-ui](https://github.com/nheyn/react-swarm-ui) and [baduk-bots-server](https://github.com/nheyn/baduk-bots-server)__
+
 ## Start SwarmUI
 To start the swarm:
 
